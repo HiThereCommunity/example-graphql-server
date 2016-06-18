@@ -26,9 +26,9 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dirkjanrutten/TodoList-GraphQL/issues"
+    "url": "https://github.com/dirkjanrutten/example-graphl-server/issues"
   },
-  "homepage": "https://github.com/dirkjanrutten/TodoList-GraphQL#readme",
+  "homepage": "https://github.com/dirkjanrutten/example-graphl-server",
   "dependencies": {
     "chai": "^3.5.0",
     "express": "^4.14.0",
