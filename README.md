@@ -9,6 +9,7 @@ that exposes a [GraphQL](http://graphql.org/) API.
 - Simple development workflow
 - Testing suite
 - Command for deploying to production
+- Static type checking using [Flow](https://flowtype.org/)
 
 ## Getting Started
 
@@ -46,16 +47,30 @@ $ npm run serve
 
 ### Testing
 
+#### Mocha
+
 All the tests are performed using `mocha` and assertions are made using `chai`. Tests are located in folders
 under the name `__tests__`.
 
-Run the tests using the command
+Note, `mocha` has been setup to import modules contained in the `/resources` directory.
+
+
+Run the `mocha` tests using the command
 
 ```
 $ npm run test
 ```
 
-Mocha imports any modules contained in the `/resources` directory.
+#### Flow
+
+This project includes the static type checking tool [Flow](https://flowtype.org/). Add `// @flow`
+at top of any file that you want `flow` to check.
+
+Run the `flow` type check using the command
+
+```
+$ npm run check
+```
 
 ## The GraphQL API
 

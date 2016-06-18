@@ -1,3 +1,5 @@
+// @flow
+
 /**
  * Created by Dirk-Jan Rutten on 18/06/16.
  */

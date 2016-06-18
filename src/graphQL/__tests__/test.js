@@ -13,7 +13,7 @@ import schema from "./../index";
 
 describe("Test the schema", ()=>{
 
-    it("Should return hello, world", async ()=>{
+    it("The `hello` query should return `hello, world`", async ()=>{
         return expect(
             await graphql(schema, "{ hello }")
         ).to.deep.equal({
