@@ -2,6 +2,14 @@
 
 This repository contains an example of a [Node.js](https://nodejs.org/en/) server
 that exposes a [GraphQL](http://graphql.org/) API.
+
+## What's included
+
+- GraphQL API already setup
+- Simple development workflow
+- Testing suite
+- Command for deploying to production
+
 ## Getting Started
 
 ### Installing dependencies
@@ -18,6 +26,9 @@ Run the server in development using the following command
 ```
 $ npm run start
 ```
+
+When running the node server in development [Nodemon](https://github.com/remy/nodemon) will be turned on.
+Nodemon will watch for any file changes in the project and automatically restart the server.
 
 ### Production
 
@@ -41,8 +52,10 @@ under the name `__tests__`.
 Run the tests using the command
 
 ```
-$ npm test
+$ npm run test
 ```
+
+Mocha imports any modules contained in the `/resources` directory.
 
 ## The GraphQL API
 
