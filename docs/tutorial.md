@@ -98,7 +98,7 @@ var server = app.listen(3000, function () {
 });
 ``` 
 
-We now have our server-side code. Next, we will write our first script to start up the server. Open the `package.json` and add a script that run the code in `src/index.js` and compile it using `babel`.
+We now have our server-side code. Next, we will write our first script to start up the server. Open the `package.json` and add a script that runs the code in `src/index.js` and compiles it using `babel`.
 
 ```json
 "scripts": {
@@ -199,7 +199,9 @@ export default new GraphQLSchema({
 
 For more information on how to use `graphql-js` to build up a schema, I urge you to check out the [docs](http://graphql.org/docs/api-reference-graphql/).
 
-The final step is to link the schema to an endpoint. For this we need to to import the schema in `src/index.js` and make it available under the path `/` using `graphql-express`. Make sure to set the option `graphiql` to yes. This will allow us to play with our graphQL schema using [graphiQL](https://github.com/graphql/graphiql)
+The final step is to link the schema (in `src/GraphQL/index.js`) to an endpoint.
+
+Open `src/index.js` and import the schema from `./GraphQl`. Next, we will make the schema available using `express-graphql` under the path `/`. Make sure to set the option `graphiql` to yes. This will allow us to play with our graphQL schema using [graphiQL](https://github.com/graphql/graphiql)
 
 ```js
 import express from 'express';
@@ -219,7 +221,7 @@ var server = app.listen(3000, function () {
 });
 ``` 
 
-We are now ready to test our schema! Start up the server using `$ npm run start` and go to `localhost:3000/`, you should see `GraphiQL appear in your browser.
+We are now ready to test our schema! Start up the server using `$ npm run start` and go to `localhost:3000/`, you should see GraphiQL appear in your browser.
 
 Type in the query:
 
@@ -274,8 +276,6 @@ Like the previous sections we will again write a npm script to run all our tests
 ```diff
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node",
-    "build": "babel src --out-dir dist/",
-    "serve": "node dist/index.js",
 +	"test": "mocha --require resources/MochaSetup src/**/__tests__/**/*.js || exit 0"
    }
 ```
@@ -351,11 +351,12 @@ For this we will write a new `build` script in the `package.json` file:
 ```diff
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node",
+    "test": "mocha --require resources/MochaSetup src/**/__tests__/**/*.js || exit 0"
 +   "build": "babel src --ignore __tests__ --out-dir dist/"
    }
 ```
 
-> The build script contains ignores all the folders with name `__tests__`, we do not want our test code to be compiled because we will never need to run it in production.
+> The build script ignores all the folders with name `__tests__`, we do not want our test code to be compiled because we will never need to run it in production.
 
 Run the script:
 
@@ -370,6 +371,7 @@ Finally, we need to start the compiled production server code. For this we will 
 ```diff
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node",
+    "test": "mocha --require resources/MochaSetup src/**/__tests__/**/*.js || exit 0"
     "build": "babel src --out-dir dist/",
 +   "serve": "babel src --ignore __tests__ --out-dir dist/"
    }
