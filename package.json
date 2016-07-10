@@ -10,6 +10,10 @@
     "test": "mocha --require resources/MochaSetup src/**/__tests__/**/*.js || exit 0",
     "check": "flow check || exit 0"
   },
+  "engines": {
+    "node": ">=5.3.0",
+    "npm": "3.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HiThereCommunity/example-graphql-server.git"
