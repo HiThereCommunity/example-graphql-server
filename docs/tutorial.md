@@ -165,7 +165,7 @@ $ npm install --save express-graphql
 Next, create a new directory `graphQL` inside of the `src` folder. This will contain all the graphql code for the server.
 
 ```
-$ mkdir scr/graphQL
+$ mkdir src/graphQL
 ```
 
 Create an `index.js` file that will serve as the root for our graphQL schema. 
