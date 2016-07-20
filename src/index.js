@@ -1,10 +1,13 @@
 // @flow
 "use strict";
 
+import "babel-polyfill";
+
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from "./graphQL";
 const app = express();
+
 
 /**
  * The GraphiQL endpoint
