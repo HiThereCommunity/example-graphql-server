@@ -2,7 +2,11 @@
 
 So you want to implement a [graphQL](http://graphql.org/) api on node.js but are unsure where to begin? Then keep reading:) 
 
+<<<<<<< HEAD
 In this document I want to share what I have learned about setting up a node.js project that contains a graphQL API. 
+=======
+In this tutorial I want to share what I have learned about setting up a node.js project that contains a graphQL API. 
+>>>>>>> master
 
 More specifically, I want to explain how to: 
 
@@ -165,7 +169,7 @@ $ npm install --save express-graphql
 Next, create a new directory `graphQL` inside of the `src` folder. This will contain all the graphql code for the server.
 
 ```
-$ mkdir scr/graphQL
+$ mkdir src/graphQL
 ```
 
 Create an `index.js` file that will serve as the root for our graphQL schema. 
@@ -262,6 +266,12 @@ $ mkdir resources
 
 ```
 $ touch resources/mochaSetup.js
+```
+
+We want our test code to be transpiled using babel. In order to do this we need to make use of [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) and [babel-register](https://babeljs.io/docs/usage/require/). Download the dependency using npm: 
+
+```
+$ npm install --save-dev babel-polyfill
 ```
 
 Add the following contents to `mochaSetup.js
@@ -425,7 +435,13 @@ Simply add `// @flow` to any other files that you wish to be checked by flow.
 
 In the development workflow we use `babel-node` for compiling javascript and starting the server. However, Babel explicitly [states](https://babeljs.io/docs/usage/cli/) that this should not be used for running node.js because it is very heavy to run and will add unnecessary overhead to the server.
 
-We need to compile the javascript code in the `src` folder once using babel and write the resulting compiled code to the `dist` folder.
+Like we did in `resources/mochaSetup.js` we need to add [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) to the `src/index.js` file so that our code is compiled using babel. Add the following to the top of `src/index.js`:
+
+```js
+import "babel-polyfill";
+```
+
+We want to compile the javascript code in the `src` folder once using babel and write the resulting compiled code to the `dist` folder.
 
 For this we will write a new `build` script in the `package.json` file:
 
