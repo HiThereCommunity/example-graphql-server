@@ -2,11 +2,9 @@
 
 So you want to implement a [graphQL](http://graphql.org/) api on node.js but are unsure where to begin? Then keep reading:) 
 
-<<<<<<< HEAD
 In this document I want to share what I have learned about setting up a node.js project that contains a graphQL API. 
-=======
+
 In this tutorial I want to share what I have learned about setting up a node.js project that contains a graphQL API. 
->>>>>>> master
 
 More specifically, I want to explain how to: 
 
