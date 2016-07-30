@@ -276,7 +276,7 @@ Like the previous sections we will again write a npm script to run all our tests
 ```diff
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node",
-+	"test": "mocha --require resources/MochaSetup src/**/__tests__/**/*.js"
++	"test": "mocha --require resources/mochaSetup src/**/__tests__/**/*.js"
    }
 ```
 
@@ -351,7 +351,7 @@ For this we will write a new `build` script in the `package.json` file:
 ```diff
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node",
-    "test": "mocha --require resources/MochaSetup src/**/__tests__/**/*.js"
+    "test": "mocha --require resources/mochaSetup src/**/__tests__/**/*.js"
 +   "build": "babel src --ignore __tests__ --out-dir dist/"
    }
 ```
@@ -371,7 +371,7 @@ Finally, we need to start the compiled production server code. For this we will 
 ```diff
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node",
-    "test": "mocha --require resources/MochaSetup src/**/__tests__/**/*.js"
+    "test": "mocha --require resources/mochaSetup src/**/__tests__/**/*.js"
     "build": "babel src --out-dir dist/",
 +   "serve": "babel src --ignore __tests__ --out-dir dist/"
    }
