@@ -1,5 +1,7 @@
 # Example Node server with a GraphQL API
 
+[![Build Status](https://travis-ci.org/HiThereCommunity/example-graphql-server.svg?branch=master)](https://travis-ci.org/HiThereCommunity/example-graphql-server)
+
 This repository contains an example of a [Node.js](https://nodejs.org/en/) server
 that exposes a [GraphQL](http://graphql.org/) API.
 

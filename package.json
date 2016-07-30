@@ -21,11 +21,8 @@
     "API",
     "node.js"
   ],
-  "contributors": [
-    "Dirk-Jan Rutten <dirk-jan.rutten@hi-there.community>",
-    "Florentijn Hogerwerf <florentijn.hogerwerf@hi-there.community>"
-  ],
-  "license": "ISC",
+  "author": "Dirk-Jan Rutten <dirkjanrutten@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/HiThereCommunity/example-graphql-server/issues"
   },
