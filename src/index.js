@@ -15,7 +15,6 @@ import graphqlHTTP from 'express-graphql';
 import schema from "./graphQL";
 const app = express();
 
-
 /**
  * The GraphiQL endpoint
  */
@@ -34,8 +33,20 @@ app.use('/', graphqlHTTP(req => ({
     })
 ));
 
-var server = app.listen(3000, function () {
+const environment = process.env.NODE_ENV;
 
-  var port = server.address().port;
-  console.log('App listening at http://localhost:%s', port);
+var port;
+switch(environment){
+    case "production":
+        port = 80;
+        break;
+    case "development":
+        port = 3000;
+        break;
+    default:
+        throw new Error(`Unrecognized environment ${environment}`);
+}
+
+app.listen(port, function () {
+    console.log(`Server running on port ${port}`);
 });
