@@ -35,6 +35,8 @@ $ npm run start
 When running the node server in development [Nodemon](https://github.com/remy/nodemon) will be turned on.
 Nodemon will watch for any file changes in the project and automatically restart the server.
 
+> The server runs on port 3000 in development
+
 ### Production
 
 In production we precompile all the files in the `/src` directory to ES5 syntax using `babel`. These precompiled files are then moved to the `/dist` folder. Precompile the files using the following command
@@ -48,6 +50,8 @@ To run the precompiled assets in production run the command
 ```
 $ npm run serve
 ```
+
+> The server runs on port 80 in production.
 
 ### Testing
 
@@ -78,6 +82,7 @@ $ npm run check
 
 ## The GraphQL API
 
+> The examples queries below assume that the server is running in development on port 3000.
 
 ### Writing queries
 The graphQL API can be accessed by under the path `/`. The `query` is contained in the query-string
@@ -95,3 +100,4 @@ In addition, you can also use [GraphiQL](https://github.com/graphql/graphiql) fo
  ```
 http://localhost:3000/graphiql
  ```
+

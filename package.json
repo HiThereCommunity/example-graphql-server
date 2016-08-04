@@ -4,15 +4,15 @@
   "description": "Example of a node server with a GraphQL endpoint",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node",
+    "start": "NODE_ENV=development nodemon src/index.js --exec babel-node",
     "build": "babel src --ignore __tests__ --out-dir dist/",
-    "serve": "node dist/index.js",
+    "serve": "sudo NODE_ENV=production node dist/index.js",
     "test": "mocha --require resources/mochaSetup src/**/__tests__/**/*.js",
     "check": "flow check",
     "travis": "npm run check && npm run test"
   },
   "engines": {
-    "node": ">=5.3.0",
+    "node": "4.x || 5.x || 6.x",
     "npm": "2.x || 3.x"
   },
   "repository": {
