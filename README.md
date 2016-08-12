@@ -5,7 +5,7 @@
 This repository contains an example of a [Node.js](https://nodejs.org/en/) server
 that exposes a [GraphQL](http://graphql.org/) API.
 
-Check out the [tutorial](./docs/tutorial.md) for a step-by-step overview on how the code in this project can be created.
+Check out the [tutorial](./docs/tutorial.md) for a step-by-step overview on how to set up a graphQL API in node.js.
 
 ## What's included
 
