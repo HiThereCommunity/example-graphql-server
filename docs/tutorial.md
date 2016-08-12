@@ -481,3 +481,90 @@ $ npm run serve
 ```
 
 The server should start and output `App listening at http://localhost:3000` in the console. You can now go to `localhost:3000` in your browser and `graphiql` should open up.
+
+A current problem with our setup is that the production server starts on port `3000`; it should up on port `80` because it would allow us to simply navigate to `http://localhost` removing the need to specify the port in the URL.
+
+In order to do this we need to use **environment variables** in `node`.
+
+# Setting environment variables
+
+In the previous sections we defined a development and production environment for the server. We need to use `node`'s **environmental variables** to allow our javascript to access the current environment in which it is running. 
+
+In this section environmental variables will be used to start the server on port `3000` in `development` and port `80` in `production`.
+
+The first thing that needs to be done is adapt the `scripts` in the `package.json` and add a node environment `NODE_ENV` to the `start` and `serve` script.
+
+```diff
+  "scripts": {
+-    "start": "nodemon src/index.js --exec babel-node",
++    "start": "NODE_ENV=development nodemon src/index.js --exec babel-node",    
+    "test": "mocha --require resources/mochaSetup src/**/__tests__/**/*.js",
+    "check": "flow check",
+    "build": "babel src --out-dir dist/",
+-   "serve": "babel src --ignore __tests__ --out-dir dist/",
++   "serve": "sudo NODE_ENV=production node dist/index.js"
+   }
+```
+
+> Note, we add `sudo` to the `serve` script because we need root user privilege to start the server on port `80`.
+> 
+> The above commands can only be used on `OSX`/`linux`. For `Windows` use: 
+> 
+> ```js
+>"start": "SET NODE_ENV=development&&nodemon src/index.js --exec babel-node",
+> "serve": "SET NODE_ENV=production&&node dist/index.js"
+> ```
+
+The `NODE_ENV` set in the scripts above can be accessed in our javascript code. Open up the file `src/index.js` and replace the previous code:
+
+```js
+var server = app.listen(3000, function () {
+  var port = server.address().port;
+  console.log('App listening at http://localhost:%s', port);
+});
+```
+
+with the following code: 
+
+```js
+const environment = process.env.NODE_ENV;
+
+var port;
+switch(environment){
+    case "production":
+        port = 80;
+        break;
+    case "development":
+        port = 3000;
+        break;
+    default:
+        throw new Error(`Unrecognized environment ${environment}`);
+}
+
+app.listen(port, function () {
+    console.log(`Server running on port ${port}`);
+});
+```
+
+In the code above we retrieve the `NODE_ENV` passed in the scripts using `process.env.NODE_ENV` and then perform a switch on its value and set the `port` accordingly.
+
+Try it out! Run the server in development
+
+```
+$ npm run start
+```
+
+The console should output `Server running on port 3000`. Go to `localhost:3000` in the browser and `graphiql` should open up.
+
+Now, run the following scripts to start the server in production
+
+```
+$ npm run build
+$ npm run serve
+```
+
+> The console will prompt you to enter you password because we are starting the server using the `sudo` command.
+
+The console should output `Server running on port 80`. Go to `localhost` in the browser and `graphiql` should open up.
+
+

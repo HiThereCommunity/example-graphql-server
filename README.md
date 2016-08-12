@@ -5,7 +5,7 @@
 This repository contains an example of a [Node.js](https://nodejs.org/en/) server
 that exposes a [GraphQL](http://graphql.org/) API.
 
-Check out the [tutorial](./docs/tutorial.md) for a step-by-step overview on how the code in this project can be created.
+Check out the [tutorial](./docs/tutorial.md) for a step-by-step overview on how to set up a graphQL API in node.js.
 
 ## What's included
 
@@ -26,10 +26,16 @@ $ npm install
 
 ### Development
 
-Run the server in development using the following command
+Run the server in development on `linux` using the following command
 
 ```
 $ npm run start
+```
+
+For windows run
+
+```
+$ npm run startWindows
 ```
 
 When running the node server in development [Nodemon](https://github.com/remy/nodemon) will be turned on.
@@ -45,10 +51,16 @@ In production we precompile all the files in the `/src` directory to ES5 syntax 
 $ npm run build
 ```
 
-To run the precompiled assets in production run the command
+To run the precompiled assets in production on `linux` run the command
 
 ```
 $ npm run serve
+```
+
+For `windows` run the command
+
+```
+$ npm run startWindows
 ```
 
 > The server runs on port 80 in production.
