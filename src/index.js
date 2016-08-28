@@ -8,45 +8,45 @@
  *
  */
 
-import "babel-polyfill";
+import 'babel-polyfill'
 
-import express from 'express';
-import graphqlHTTP from 'express-graphql';
-import schema from "./graphQL";
-const app = express();
+import express from 'express'
+import graphqlHTTP from 'express-graphql'
+import schema from './graphQL'
+const app = express()
 
 /**
  * The GraphiQL endpoint
  */
 app.use(`/graphiql`, graphqlHTTP(req => ({
-      schema: schema,
-      graphiql: true
-    })
-));
+  schema: schema,
+  graphiql: true
+})
+))
 
 /**
  * The single GraphQL Endpoint
  */
 app.use('/', graphqlHTTP(req => ({
-      schema: schema,
-      graphiql: false
-    })
-));
+  schema: schema,
+  graphiql: false
+})
+))
 
-const environment = process.env.NODE_ENV;
+const environment = process.env.NODE_ENV
 
-var port;
-switch(environment){
-    case "production":
-        port = 80;
-        break;
-    case "development":
-        port = 3000;
-        break;
-    default:
-        throw new Error(`Unrecognized environment ${environment}`);
+var port
+switch (environment) {
+  case 'production':
+    port = 80
+    break
+  case 'development':
+    port = 3000
+    break
+  default:
+    throw new Error(`Unrecognized environment ${environment}`)
 }
 
 app.listen(port, function () {
-    console.log(`Server running on port ${port}`);
-});
+  console.log(`Server running on port ${port}`)
+})
