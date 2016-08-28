@@ -8,23 +8,21 @@
  */
 
 import {
-    graphql,
-    GraphQLObjectType,
-    GraphQLSchema,
-} from 'graphql';
+    graphql
+} from 'graphql'
+import {expect} from 'chai'
+import { describe, it } from 'mocha'
 
-import {expect} from "chai";
-import schema from "./../index";
+import schema from './../index'
 
-describe("Test the schema", ()=>{
-
-    it("The `hello` query should return `hello, world`", async ()=>{
-        return expect(
-            await graphql(schema, "{ hello }")
+describe('Test the schema', () => {
+  it('The `hello` query should return `hello, world`', async () => {
+    return expect(
+            await graphql(schema, '{ hello }')
         ).to.deep.equal({
-            data: {
-                hello: "hello, world"
-            }
-        });
-    });
-});
+          data: {
+            hello: 'hello, world'
+          }
+        })
+  })
+})

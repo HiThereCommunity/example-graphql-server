@@ -92,6 +92,16 @@ Run the `flow` type check using the command
 $ npm run check
 ```
 
+#### Linting
+
+The library [standard](http://standardjs.com/) is used for linting the code. 
+
+To check that all the code has been linted correctly run the following command
+
+```
+$ npm run lint
+```
+
 ## The GraphQL API
 
 > The examples queries below assume that the server is running in development on port 3000.
