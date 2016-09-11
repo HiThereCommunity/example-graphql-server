@@ -13,7 +13,6 @@ Check out the [tutorial](./docs/tutorial.md) for a step-by-step overview on how 
 - Simple development workflow
 - Testing suite
 - Command for deploying to production
-- Static type checking using [Flow](https://flowtype.org/)
 
 ## Getting Started
 
@@ -32,14 +31,11 @@ Run the server in development on `linux` using the following command
 $ npm run start
 ```
 
-For windows run
+When running the server in development a file watcher is turned on that performs 3 checks whenever a file contained in the `/src` folder is changed.
 
-```
-$ npm run startWindows
-```
-
-When running the node server in development [Nodemon](https://github.com/remy/nodemon) will be turned on.
-Nodemon will watch for any file changes in the project and automatically restart the server.
+1. Restart the server so that any changes are directly loaded
+2. Run the linter [standard](http://standardjs.com/).
+3. Run [flow](https://flowtype.org/) static type checker. Add `// @flow` at top of any file that you want flow to check.
 
 > The server runs on port 3000 in development
 
@@ -60,14 +56,113 @@ $ npm run serve
 For `windows` run the command
 
 ```
-$ npm run startWindows
+$ npm run serveWindows
 ```
 
 > The server runs on port 80 in production.
 
-### Testing
+## The GraphQL API
 
-#### Mocha
+### Writing queries
+The graphQL API can be accessed by under the path `/`. The `query` is contained in the query-string
+of the request.
+
+```
+/?query={hello}
+```
+
+### GraphiQL
+
+In addition, you can also use [GraphiQL](https://github.com/graphql/graphiql) for
+ writing queries in an IDE environment. GraphiQL can be accessed using the URL path `/graphiql`
+
+ ```
+/graphiql
+ ```
+
+### Errors in execution of queries
+
+Any errors that occurs during the execution of a graphql query are contained in the response object under the key `"errors"`.
+
+The **structure of the error object differs depending on the environment that the server is run in**: production or development.
+
+#### Errors in development
+
+When running the server in development the error object has 3 properties: 
+
+* `"message"`: An explanation of the error that occurred
+* `"stack"`: The stacktrace of the error. This is very useful when debugging!
+* `"locations"`: An object that contains the `line` and the `column` associated with the graphql query where the execution error occurred.
+
+```js
+{
+  "errors": [{
+  	"message": string,
+  	"stack": [ string ],
+  	"locations": [{
+  		"line": number,
+  		"column": number
+  	}]
+  }]
+}
+```
+
+**Example: graphql error in development** 
+
+```js
+{
+  "errors": [
+    {
+      "message": "Some error occurred",
+      "stack": [
+        "Error: Unable to access database",
+        "    at resolve (index.js:42:17)",
+        "    at resolveOrError (/node_modules/graphql/execution/execute.js:447:12)",
+        "    at resolveField (/node_modules/graphql/execution/execute.js:438:16)",
+        "    at /node_modules/graphql/execution/execute.js:245:18",
+        "    at Array.reduce (native)",
+        "    at executeFields (/node_modules/graphql/execution/execute.js:242:42)"
+      ],
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Errors in production
+
+When running the server in production the error object only contains the error `"message"`.
+
+When running the server in production any errors that occur during the execution of the graphql query will be shown in the response error object that is found under the key "errors" in the graphql response.
+
+The array of object for the key `"errors"` contains all the errors that have occurred. 
+
+```js
+{
+  "errors": [{
+    "message": string		
+  }]
+}
+```
+
+**Example: graphql error in production**
+
+```js
+{
+  "errors":[
+    {
+       "message": "Some error occurred"
+    }
+  ]
+}
+```
+
+## Testing
 
 All the tests are performed using `mocha` and assertions are made using `chai`. Tests are located in folders
 under the name `__tests__`.
@@ -80,46 +175,4 @@ Run the `mocha` tests using the command
 ```
 $ npm run test
 ```
-
-#### Flow
-
-This project includes the static type checking tool [Flow](https://flowtype.org/). Add `// @flow`
-at top of any file that you want `flow` to check.
-
-Run the `flow` type check using the command
-
-```
-$ npm run check
-```
-
-#### Linting
-
-The library [standard](http://standardjs.com/) is used for linting the code. 
-
-To check that all the code has been linted correctly run the following command
-
-```
-$ npm run lint
-```
-
-## The GraphQL API
-
-> The examples queries below assume that the server is running in development on port 3000.
-
-### Writing queries
-The graphQL API can be accessed by under the path `/`. The `query` is contained in the query-string
-of the request.
-
-```
-http://localhost:3000/?query={hello}
-```
-
-### GraphiQL
-
-In addition, you can also use [GraphiQL](https://github.com/graphql/graphiql) for
- writing queries in an IDE environment. GraphiQL can be accessed using the URL path `/graphiql`
-
- ```
-http://localhost:3000/graphiql
- ```
 
