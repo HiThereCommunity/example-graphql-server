@@ -14,38 +14,52 @@ import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import schema from './graphQL'
 const app = express()
+import { GraphQLError } from 'graphql/error'
+
+const environment = process.env.NODE_ENV
+
+var port: number
+var errorFormatter
+
+switch (environment) {
+  case 'production':
+    port = 80
+    errorFormatter = (error: GraphQLError) => ({
+      message: error.message
+    })
+    break
+  case 'development':
+    port = 3000
+    errorFormatter = (error: GraphQLError) => ({
+      message: error.message,
+      stack: error.stack.split('\n'),
+      locations: error.locations
+    })
+    break
+  default:
+    throw new Error(`Unrecognized environment ${environment}`)
+}
 
 /**
  * The GraphiQL endpoint
  */
 app.use(`/graphiql`, graphqlHTTP(req => ({
   schema: schema,
-  graphiql: true
+  graphiql: true,
+  formatError: errorFormatter
 })
 ))
 
 /**
- * The single GraphQL Endpoint
+ * The GraphQL Endpoint
  */
 app.use('/', graphqlHTTP(req => ({
   schema: schema,
-  graphiql: false
+  graphiql: false,
+  pretty: environment !== 'production',
+  formatError: errorFormatter
 })
 ))
-
-const environment = process.env.NODE_ENV
-
-var port
-switch (environment) {
-  case 'production':
-    port = 80
-    break
-  case 'development':
-    port = 3000
-    break
-  default:
-    throw new Error(`Unrecognized environment ${environment}`)
-}
 
 app.listen(port, function () {
   console.log(`Server running on port ${port}`)
