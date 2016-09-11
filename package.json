@@ -1,6 +1,6 @@
 {
   "name": "example-graphql-server",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Example of a node server with a GraphQL endpoint",
   "scripts": {
     "start": "gulp development",
@@ -44,13 +44,11 @@
     "babel-preset-stage-2": "^6.5.0",
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
-    "flow-bin": "^0.27.0",
     "gulp": "^3.9.1",
     "gulp-flowtype": "^1.0.0",
     "gulp-nodemon": "^2.1.0",
     "gulp-standard": "^8.0.2",
     "mocha": "^2.5.3",
-    "open": "0.0.5",
     "run-sequence": "^1.2.2"
   },
   "standard": {
