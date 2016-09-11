@@ -3,15 +3,15 @@
   "version": "1.0.2",
   "description": "Example of a node server with a GraphQL endpoint",
   "scripts": {
-    "start": "NODE_ENV=development nodemon src/index.js --exec babel-node",
-    "startWindows": "SET NODE_ENV=development&&nodemon src/index.js --exec babel-node",
+    "start": "gulp development --gupfile gulpfile.js",
     "build": "babel src --ignore __tests__ --out-dir dist/",
     "serve": "sudo NODE_ENV=production node dist/index.js",
     "serveWindows": "SET NODE_ENV=production&&node dist/index.js",
     "test": "mocha --require resources/mochaSetup src/**/__tests__/**/*.js",
     "check": "flow check",
     "lint": "standard",
-    "travis": "npm run check && npm run lint && npm run test"
+    "travis": "gulp travis && npm run test",
+    "travis2": "npm run check && npm run lint && npm run test"
   },
   "engines": {
     "node": "4.x || 5.x || 6.x",
@@ -48,6 +48,10 @@
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
     "flow-bin": "^0.27.0",
+    "gulp": "^3.9.1",
+    "gulp-flowtype": "^1.0.0",
+    "gulp-nodemon": "^2.1.0",
+    "gulp-standard": "^8.0.2",
     "mocha": "^2.5.3",
     "nodemon": "^1.9.2",
     "standard": "^8.0.0"

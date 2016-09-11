@@ -35,7 +35,7 @@ app.use('/', graphqlHTTP(req => ({
 
 const environment = process.env.NODE_ENV
 
-var port
+var port:number
 switch (environment) {
   case 'production':
     port = 80
@@ -44,7 +44,8 @@ switch (environment) {
     port = 3000
     break
   default:
-    throw new Error(`Unrecognized environment ${environment}`)
+    if (environment == null) throw new Error(`The environment is not set, please set one using NODE_ENV`)
+    else throw new Error(`Unrecognized environment ${environment}`)
 }
 
 app.listen(port, function () {
