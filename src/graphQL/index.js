@@ -22,7 +22,7 @@ export default new GraphQLSchema({
       hello: {
         type: GraphQLString,
         description: 'Hello, world',
-         resolve: (): ?string => 'hello, world'
+        resolve: (): ?string => 'hello, world'
       }
     })
   })

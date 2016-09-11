@@ -35,7 +35,8 @@ app.use('/', graphqlHTTP(req => ({
 
 const environment = process.env.NODE_ENV
 
-var port:number
+var port:string
+
 switch (environment) {
   case 'production':
     port = 80
