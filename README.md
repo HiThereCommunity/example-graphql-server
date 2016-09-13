@@ -47,17 +47,12 @@ In production we precompile all the files in the `/src` directory to ES5 syntax 
 $ npm run build
 ```
 
-To run the precompiled assets in production on `linux` run the command
+To run the precompiled assets in production run the command
 
 ```
 $ npm run serve
 ```
 
-For `windows` run the command
-
-```
-$ npm run serveWindows
-```
 
 > The server runs on port 80 in production.
 

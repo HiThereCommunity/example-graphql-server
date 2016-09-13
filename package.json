@@ -5,8 +5,7 @@
   "scripts": {
     "start": "gulp development",
     "build": "babel src --ignore __tests__ --out-dir dist/",
-    "serve": "sudo NODE_ENV=production node dist/index.js",
-    "serveWindows": "SET NODE_ENV=production&&node dist/index.js",
+    "serve": "gulp serve",
     "test": "mocha --require resources/mochaSetup src/**/__tests__/**/*.js",
     "travis": "gulp travis && npm run test"
   },
@@ -48,8 +47,7 @@
     "gulp-flowtype": "^1.0.0",
     "gulp-nodemon": "^2.1.0",
     "gulp-standard": "^8.0.2",
-    "mocha": "^2.5.3",
-    "run-sequence": "^1.2.2"
+    "mocha": "^2.5.3"
   },
   "standard": {
     "parser": "babel-eslint"
