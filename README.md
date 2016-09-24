@@ -2,68 +2,60 @@
 
 [![Build Status](https://travis-ci.org/HiThereCommunity/example-graphql-server.svg?branch=master)](https://travis-ci.org/HiThereCommunity/example-graphql-server)
 
-This repository contains an example of a [Node.js](https://nodejs.org/en/) server
-that exposes a [GraphQL](http://graphql.org/) API.
+This repository contains a starter project for creating a [Node.js](https://nodejs.org/en/) server that exposes a [GraphQL](http://graphql.org/) API.
 
-Check out the [tutorial](./docs/tutorial.md) for a step-by-step overview on how to set up a graphQL API in node.js.
 
 ## What's included
 
 - GraphQL API already setup
 - Simple development workflow
 - Testing suite
-- Command for deploying to production
-- Static type checking using [Flow](https://flowtype.org/)
+- Simple deployment to production
 
 ## Getting Started
 
 ### Installing dependencies
 Install the dependencies by running the following command from the terminal in the directory of the project.
 
-```
-$ npm install
+```sh
+npm install
 ```
 
 ### Development
 
-Run the server in development on `linux` using the following command
+Run the server in development using the following command
 
-```
-$ npm run start
-```
-
-For windows run
-
-```
-$ npm run startWindows
+```sh
+npm run start
 ```
 
-When running the node server in development [Nodemon](https://github.com/remy/nodemon) will be turned on.
-Nodemon will watch for any file changes in the project and automatically restart the server.
+> This will start the node server contained in the folder `/src`.
+
+When running the server in development a file watcher is turned on that performs 3 checks whenever a file contained in the `/src` folder is changed.
+
+1. Restart the server so that any changes are directly loaded
+2. Run the linter [standard](http://standardjs.com/).
+3. Run [flow](https://flowtype.org/) static type checker. Add `// @flow` at top of any file that you want flow to check.
 
 > The server runs on port 3000 in development
 
 ### Production
 
-In production we precompile all the files in the `/src` directory to ES5 syntax using `babel`. These precompiled files are then moved to the `/dist` folder. Precompile the files using the following command
+Start the server in production on **port 80** using the command:
 
+```sh
+npm run serve
 ```
-$ npm run build
-```
+ 
+> A folder `/dist` will appear. This contains the code on which the production server runs.
+> 
+> [Forever](https://github.com/foreverjs/forever) is used to run the node server in `/dist` continuously in the background.
 
-To run the precompiled assets in production on `linux` run the command
+In order to stop the server run:
 
+```sh
+npm run stop
 ```
-$ npm run serve
-```
-
-For `windows` run the command
-
-```
-$ npm run serveWindows
-```
-
-> The server runs on port 80 in production.
 
 ## The GraphQL API
 
@@ -168,8 +160,6 @@ The array of object for the key `"errors"` contains all the errors that have occ
 
 ## Testing
 
-### Mocha
-
 All the tests are performed using `mocha` and assertions are made using `chai`. Tests are located in folders
 under the name `__tests__`.
 
@@ -178,27 +168,10 @@ Note, `mocha` has been setup to import modules contained in the `/resources` dir
 
 Run the `mocha` tests using the command
 
-```
-$ npm run test
-```
-
-### Flow
-
-This project includes the static type checking tool [Flow](https://flowtype.org/). Add `// @flow`
-at top of any file that you want `flow` to check.
-
-Run the `flow` type check using the command
-
-```
-$ npm run check
+```sh
+npm run test
 ```
 
-### Linting
+##Support
 
-The library [standard](http://standardjs.com/) is used for linting the code. 
-
-To check that all the code has been linted correctly run the following command
-
-```
-$ npm run lint
-```
+This server runs on a linux environment, **windows is not supported**.

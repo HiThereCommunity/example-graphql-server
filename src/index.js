@@ -37,7 +37,9 @@ switch (environment) {
     })
     break
   default:
-    throw new Error(`Unrecognized environment ${environment}`)
+
+    if (environment == null) throw new Error(`No environment has been specified, set one using NODE_ENV and set it equal to 'production' or 'development'`)
+    else throw new Error(`Unrecognized environment ${environment}`)
 }
 
 /**
