@@ -2,34 +2,34 @@
 
 [![Build Status](https://travis-ci.org/HiThereCommunity/example-graphql-server.svg?branch=master)](https://travis-ci.org/HiThereCommunity/example-graphql-server)
 
-This repository contains an example of a [Node.js](https://nodejs.org/en/) server
-that exposes a [GraphQL](http://graphql.org/) API.
+This repository contains a starter project for creating a [Node.js](https://nodejs.org/en/) server that exposes a [GraphQL](http://graphql.org/) API.
 
-Check out the [tutorial](./docs/tutorial.md) for a step-by-step overview on how to set up a graphQL API in node.js.
 
 ## What's included
 
 - GraphQL API already setup
 - Simple development workflow
 - Testing suite
-- Command for deploying to production
+- Simple deployment to production
 
 ## Getting Started
 
 ### Installing dependencies
 Install the dependencies by running the following command from the terminal in the directory of the project.
 
-```
-$ npm install
+```sh
+npm install
 ```
 
 ### Development
 
-Run the server in development on `linux` using the following command
+Run the server in development using the following command
 
+```sh
+npm run start
 ```
-$ npm run start
-```
+
+> This will start the node server contained in the folder `/src`.
 
 When running the server in development a file watcher is turned on that performs 3 checks whenever a file contained in the `/src` folder is changed.
 
@@ -41,20 +41,21 @@ When running the server in development a file watcher is turned on that performs
 
 ### Production
 
-In production we precompile all the files in the `/src` directory to ES5 syntax using `babel`. These precompiled files are then moved to the `/dist` folder. Precompile the files using the following command
+Start the server in production on **port 80** using the command:
 
+```sh
+npm run serve
 ```
-$ npm run build
+ 
+> A folder `/dist` will appear. This contains the code on which the production server runs.
+> 
+> [Forever](https://github.com/foreverjs/forever) is used to run the node server in `/dist` continuously in the background.
+
+In order to stop the server run:
+
+```sh
+npm run stop
 ```
-
-To run the precompiled assets in production run the command
-
-```
-$ npm run serve
-```
-
-
-> The server runs on port 80 in production.
 
 ## The GraphQL API
 
@@ -167,7 +168,10 @@ Note, `mocha` has been setup to import modules contained in the `/resources` dir
 
 Run the `mocha` tests using the command
 
-```
-$ npm run test
+```sh
+npm run test
 ```
 
+##Support
+
+This server runs on a linux environment, **windows is not supported**.

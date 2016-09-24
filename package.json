@@ -5,7 +5,8 @@
   "scripts": {
     "start": "gulp development",
     "build": "babel src --ignore __tests__ --out-dir dist/",
-    "serve": "gulp serve",
+    "serve": "npm run build && sudo NODE_ENV=production forever start --minUptime 1000 --spinSleepTime 1000 dist/index.js",
+    "stop": "sudo forever stopall",
     "test": "mocha --require resources/mochaSetup src/**/__tests__/**/*.js",
     "travis": "gulp travis && npm run test"
   },
@@ -28,11 +29,13 @@
   "bugs": {
     "url": "https://github.com/HiThereCommunity/example-graphql-server/issues"
   },
-  "homepage": "https://github.com/HiThereCommunity/example-graphql-server",
+  "homepage": "https://github.cm/HiThereCommunity/example-graphql-server",
   "dependencies": {
     "express": "^4.14.0",
     "express-graphql": "^0.5.4",
-    "graphql": "^0.7.0"
+    "forever": "^0.15.2",
+    "graphql": "^0.7.0",
+    "gulp": "^3.9.1"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",

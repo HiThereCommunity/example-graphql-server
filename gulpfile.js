@@ -16,7 +16,7 @@ var gulp = require('gulp');
 var nodemon = require("gulp-nodemon");
 var standard = require("gulp-standard");
 var flow = require('gulp-flowtype');
-var exec = require('child_process').exec;
+
 /**
  * Global variables that can be accessed by all the tasks.
  */
@@ -49,26 +49,6 @@ gulp.task('development', function () {
     });
 });
 
-
-//TODO: Add comments here...
-gulp.task('serve', function() {
-
-    var isWin = /^win/.test(process.platform);
-
-    var serveScript;
-
-    if (isWin) serveScript = "SET NODE_ENV=production&&node dist/index.js";
-    else serveScript = "sudo NODE_ENV=production node dist/index.js";
-
-    //TODO: Make sure that the output is actually logged to the console...
-    exec(serveScript, function (error, stdout, stderr) {
-        console.log('stdout: ', stdout);
-        console.log('stderr: ', stderr);
-        if (error !== null) {
-            console.log('exec error: ', error);
-        }
-    });
-});
 /**
  * The task that is run when travis CI is run. This
  * performs the tasks 'typecheck' and 'standard'.
